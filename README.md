@@ -1,4 +1,3 @@
-
 # alma-unset-acq-tag-perl
 
 The goal of this project is to create an itemized set in Alma of all Physical Titles which only have an item or items with a Process Type = Acquisition. Then, using that set as the input, to run a job in Alma which will make the Management Tag = Don’t Publish.
@@ -13,8 +12,10 @@ There needs to be two logical sets in Alma, which will be combined with the NOT 
 
 OCLC_every_physical_title_with_acquisition_v2
 Physical Titles where (Process type equals "Acquisition")
+![seta](https://github.com/dfulmer/alma-unset-acq-tag-perl/assets/18075253/31bc5616-1c82-4ed0-9991-31c67d026d25)
 
 OCLC_every_physical_title_except_acquisition_v2
+![setb](https://github.com/dfulmer/alma-unset-acq-tag-perl/assets/18075253/15c28bd7-c258-474c-8700-b86543d5e4ed)
 
 ## Creating the set and changing the Management Tags manually
 
@@ -37,13 +38,13 @@ Follow these steps to create the itemized set of Physical Titles which have excl
 ## Creating the set and changing the Management Tags via scripts
 
 There are two programs which carry out the two steps described above.
-
+```
 alma-unset-acq-tag-create-set.pl
-
+```
 This program combines OCLC_every_physical_title_with_acquisition_v2 NOT OCLC_every_physical_title_except_acquisition_v2 into an itemized set, the name of which begins with “OCLC_every_physical_title_with_acquisition_v2 - Combined - “
-
+```
 alma-unset-acq-tag-set-managment-tags.pl
-
+```
 This program runs the “Set Management Tags” job on the newly created itemized set and it sets the Management Tags of all members of that set to “Don’t publish” regardless of what it has for a Management Tag.
 
 This is how to use the two scripts from your computer:
@@ -61,7 +62,7 @@ copy .env-example to .env
 cp .env-example .env
 ```
 
-edit .env with actual environment variables
+edit .env with actual environment variables.
 Also, edit ‘alma-unset-acq-tag-create-set.pl’ with the correct sets.
 Also, potentially edit ‘alma-unset-acq-tag-set-managment-tags.pl’, but only if you want to do it using the old method with the larger set.
 
@@ -90,23 +91,28 @@ Then type ‘exit’ and enter.
 
 ## Scheduling the scripts
 
-To automate the process:
-Put these files in a directory of your choice.
+To automate the process,
+put these three files in a directory of your choice:
 
+```
 .env
 alma-unset-acq-tag-set-managment-tags.pl
 alma-unset-acq-tag-create-set.pl
+```
 
 Check the .env file to make sure you have the API key that you want (Sandbox/Production).
 Check alma-unset-acq-tag-create-set.pl to make sure you have the right sets and have commented out the wrong sets.
 
 Here is how to edit your crontab file so the scripts will run automatically. In your terminal type:
+```
 crontab -e
-Arrow down to where you want to change it
-Press “i” - to get in insert mode
+```
+and press "Enter". Arrow down to where you want to change it. Press “i” - to get in insert mode.
 
 Make your changes. For example, this would run the first script at 1am and the second at 5am every day:
+```
 00 01 * * * perl /path/to/scripts/alma-unset-acq-tag-create-set.pl
 00 05 * * * perl /path/to/scripts/alma-unset-acq-tag-set-management-tags.pl
+```
 
-“Escape” to exit insert mode, then press “:” then press “x” then press “Enter”.
+Press “Escape” to exit insert mode, then press “:” then press “x” then press “Enter”.
