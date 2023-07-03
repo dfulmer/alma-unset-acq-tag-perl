@@ -43,7 +43,7 @@ alma-unset-acq-tag-create-set.pl
 ```
 This program combines OCLC_every_physical_title_with_acquisition_v2 NOT OCLC_every_physical_title_except_acquisition_v2 into an itemized set, the name of which begins with “OCLC_every_physical_title_with_acquisition_v2 - Combined - “
 ```
-alma-unset-acq-tag-set-managment-tags.pl
+alma-unset-acq-tag-set-management-tags.pl
 ```
 This program runs the “Set Management Tags” job on the newly created itemized set and it sets the Management Tags of all members of that set to “Don’t publish” regardless of what it has for a Management Tag.
 
@@ -64,7 +64,7 @@ cp .env-example .env
 
 edit .env with actual environment variables.
 Also, edit ‘alma-unset-acq-tag-create-set.pl’ with the correct sets.
-Also, potentially edit ‘alma-unset-acq-tag-set-managment-tags.pl’, but only if you want to do it using the old method with the larger set.
+Also, potentially edit ‘alma-unset-acq-tag-set-management-tags.pl’, but only if you want to do it using the old method with the larger set.
 
 Build container
 ```
@@ -96,7 +96,7 @@ put these three files in a directory of your choice:
 
 ```
 .env
-alma-unset-acq-tag-set-managment-tags.pl
+alma-unset-acq-tag-set-management-tags.pl
 alma-unset-acq-tag-create-set.pl
 ```
 
