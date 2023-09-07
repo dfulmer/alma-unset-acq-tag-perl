@@ -51,12 +51,12 @@ $ua->default_header('Accept-Charset' => 'UTF-8');
 # my $set2 = '22766924310006381';
 
 # Sandbox - new way with a smaller set
-# OCLC_every_physical_title_with_acquisition_v2 Set ID 31337200330006381
+# OCLC_every_physical_title_with_acquisition_v2 Set ID 34493393360006381
 # OCLC_every_physical_title_except_acquisition_v2 Set ID 22766924310006381
 # The new way of doing it is: OCLC_every_physical_title_with_acquisition_v2 NOT OCLC_every_physical_title_except_acquisition_v2
 #
  my $set_operator = 'NOT';
- my $set1 = '31337200330006381';
+ my $set1 = '34493393360006381';
  my $set2 = '22766924310006381';
 
 # Production - this requires a different API key, and this is with the smaller set
